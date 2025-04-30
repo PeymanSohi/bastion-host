@@ -1,0 +1,27 @@
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install required packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - fail2ban
+    - ufw
+
+- name: Copy custom SSH config
+  copy:
+    src: sshd_config
+    dest: /etc/ssh/sshd_config
+    backup: yes
+  notify: Restart SSH
+
+- name: Enable UFW and allow SSH
+  ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Enable UFW
+  ufw:
+    state: enabled

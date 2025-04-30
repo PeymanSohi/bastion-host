@@ -1,0 +1,11 @@
+- name: Configure Bastion Host
+  hosts: bastion
+  become: true
+  roles:
+    - bastion
+
+- name: Configure Private Server
+  hosts: private
+  become: true
+  roles:
+    - private_server

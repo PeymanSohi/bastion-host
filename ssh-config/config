@@ -1,0 +1,10 @@
+Host bastion
+    HostName <BASTION_PUBLIC_IP>
+    User ubuntu
+    IdentityFile ~/.ssh/bastion-key.pem
+
+Host private-server
+    HostName <PRIVATE_SERVER_PRIVATE_IP>
+    User ubuntu
+    IdentityFile ~/.ssh/private-key.pem
+    ProxyJump bastion
